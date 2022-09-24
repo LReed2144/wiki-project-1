@@ -34,3 +34,22 @@ def entry(request, title):
             "title": title,
             "content": content
         })
+
+def search(request):
+    if request.method =="POST":
+        search = request.POST['q']
+        content = convert(search)
+        if content is not None:
+            return render(request, "encyclopedia/entry.html", {
+            "title": search,
+            "content": content
+            })
+        else: 
+            entries = util.list_entries()
+            suggestion = []
+            for entry in entries:
+                if search.lower() in entry.lower():
+                    suggestion.append(entry)
+            return render(request, "encyclopedia/search.html", {
+                "suggestion": suggestion
+            })
