@@ -36,18 +36,24 @@ def entry(request, title):
         })
 
 def search(request):
+    #going to be adding something to the page so use POST
     if request.method =="POST":
         search = request.POST['q']
+        # md to html
         content = convert(search)
         if content is not None:
             return render(request, "encyclopedia/entry.html", {
             "title": search,
             "content": content
             })
+        # elif content is not search.lower() in entry.lower():
+        #     return render(request, "encyclopedia/error.html")
+
         else: 
             entries = util.list_entries()
             suggestion = []
             for entry in entries:
+                #to find parts of words
                 if search.lower() in entry.lower():
                     suggestion.append(entry)
             return render(request, "encyclopedia/search.html", {
