@@ -24,11 +24,13 @@ def index(request):
 
 #all entries 
 def entry(request, title):
-    html_content = convert(title)
-    if html_content == None:
+    #run convert function on markdown entries
+    content = convert(title)
+    if content == None:
         return render(request, "encyclopedia/error.html")
     else:
         return render(request, "encyclopedia/entry.html", {
+            #key: value
             "title": title,
-            "content": html_content
+            "content": content
         })

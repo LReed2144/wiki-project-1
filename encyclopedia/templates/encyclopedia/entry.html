@@ -1,11 +1,12 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    Encyclopedia
+<!-- key -->
+    {{ title }}
 {% endblock %}
 
 {% block body %}
- 
-<h1>Entry</h1>
-
+ <!-- key -->
+{{ content | safe}}
+<!-- allow for an html str -->
 {% endblock %}

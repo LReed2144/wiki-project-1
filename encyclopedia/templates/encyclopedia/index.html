@@ -7,9 +7,11 @@
 {% block body %}
     <h1>All Pages</h1>
 
-    <ul>
+   <ul>
         {% for entry in entries %}
-            <li>{{ entry }}</li>
+        <!-- link each entry -->
+        <!-- link to each page -->
+            <li><a href="{% url 'entry' title=entry %}">{{ entry }}</a></li>
         {% endfor %}
     </ul>
 
