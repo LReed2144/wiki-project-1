@@ -15,8 +15,8 @@ def convert(title):
     else:
         return markdowner.convert(content)
 
-# returns a template
 
+#get content of the entry by calling the utl function 
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
@@ -26,9 +26,11 @@ def index(request):
 def entry(request, title):
     #run convert function on markdown entries
     content = convert(title)
+    # if content does not exist render 404 page
     if content == None:
         return render(request, "encyclopedia/404.html")
     else:
+    #exists use is presented with a page
         return render(request, "encyclopedia/entry.html", {
             #key: value
             "title": title,
