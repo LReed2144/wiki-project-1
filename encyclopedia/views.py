@@ -85,3 +85,9 @@ def new_page(request):
                 "title": title,
                 "content": content
             })
+#create a delete button function
+#html
+#python remove
+
+def edit(request):
+    return

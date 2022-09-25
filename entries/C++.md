@@ -1,1 +1,0 @@
-C+++ is used from computational linguistics.
