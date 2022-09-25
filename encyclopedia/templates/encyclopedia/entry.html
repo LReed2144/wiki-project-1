@@ -6,7 +6,18 @@
 {% endblock %}
 
 {% block body %}
+
  <!-- key -->
+ <!-- allow for an html str -->
 {{ content | safe}}
-<!-- allow for an html str -->
+
+<!-- edit  -->
+<form action="{% url 'edit' %}" method="POST">
+{% csrf_token %}
+    <!-- hide which entry we want to edit  -->
+    <input type="hidden" name="entry_title" value="{{ title }}">
+    <input type="submit" value="Edit" class="btn btn-primary">
+
+</form>
+
 {% endblock %}

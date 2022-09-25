@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from markdown2 import Markdown
-
+import random
 from . import util
 
 #convert the markdown files under entry to html files.  
@@ -89,5 +89,38 @@ def new_page(request):
 #html
 #python remove
 
+
+#edit
 def edit(request):
-    return
+    if request.method == "POST":
+        #grab entry title
+        title = request.POST['entry_title']
+        content = util.get_entry(title)
+        return render(request, "encyclopedia/edit.html", {
+            "title": title,
+            "content": content
+        })
+
+#to save the edit 
+def save_edit(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        content = request.POST['content']
+        util.save_entry(title, content)
+        title = convert(content)
+        return render(request, "encyclopedia/layout.html", {
+            "title": title,
+            "content": content
+        })
+#####fix the save entry page#####currently returning to layout.html
+
+#random function
+
+def rand(request):
+    allEntries =util.list_entries()
+    rand_entry = random.choice(allEntries)
+    content = convert(rand_entry)
+    return render(request, "encyclopedia/entry.html", {
+        "title": rand_entry,
+        "content": content
+    })
