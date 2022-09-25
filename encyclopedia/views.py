@@ -27,7 +27,7 @@ def entry(request, title):
     #run convert function on markdown entries
     content = convert(title)
     if content == None:
-        return render(request, "encyclopedia/error.html")
+        return render(request, "encyclopedia/404.html")
     else:
         return render(request, "encyclopedia/entry.html", {
             #key: value
@@ -35,6 +35,7 @@ def entry(request, title):
             "content": content
         })
 
+#search bar
 def search(request):
     #going to be adding something to the page so use POST
     if request.method =="POST":
@@ -46,9 +47,6 @@ def search(request):
             "title": search,
             "content": content
             })
-        # elif content is not search.lower() in entry.lower():
-        #     return render(request, "encyclopedia/error.html")
-
         else: 
             entries = util.list_entries()
             suggestion = []
@@ -58,4 +56,32 @@ def search(request):
                     suggestion.append(entry)
             return render(request, "encyclopedia/search.html", {
                 "suggestion": suggestion
+            })
+#create an elif that allows for the user to type in something wrong and renders a page that says search item not found with a link to go back
+# #check python conditionals 
+# better understand this code
+ 
+
+ #new page
+
+def new_page(request):
+    if request.method == "GET":
+        return render(request, "encyclopedia/new.html")
+    else:
+        #create a variable to get data we have in our form 
+        title = request.POST['title']
+        content = request.POST['content']
+        #use util.py to check the get entry
+        titleExist = util.get_entry(title)
+        if titleExist is not None:
+            return render(request, 'encyclopedia/error.html', {
+                "message": "Entry page already exists"
+            })
+        else:
+            util.save_entry(title, content)
+            content = convert(title)
+            title = convert(content)
+            return render(request, "encyclopedia/entry.html", {
+                "title": title,
+                "content": content
             })
