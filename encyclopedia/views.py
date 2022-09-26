@@ -4,6 +4,7 @@ import random
 from . import util
 
 #convert the markdown files under entry to html files.  
+#get the content of the encyclopedia entry
 def convert(title):
     #gets title from util.py
     content = util.get_entry(title)
@@ -16,7 +17,7 @@ def convert(title):
         return markdowner.convert(content)
 
 
-#get content of the entry by calling the utl function 
+#get content of the entry by calling the util function 
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
@@ -30,7 +31,7 @@ def entry(request, title):
     if content == None:
         return render(request, "encyclopedia/404.html")
     else:
-    #exists use is presented with a page
+    #exists- presented with a page
         return render(request, "encyclopedia/entry.html", {
             #key: value
             "title": title,
@@ -49,6 +50,8 @@ def search(request):
             "title": search,
             "content": content
             })
+        # elif content is None:
+        #     return render(request, "encyclopedia/404.html")
         else: 
             entries = util.list_entries()
             suggestion = []
@@ -87,9 +90,7 @@ def new_page(request):
                 "title": title,
                 "content": content
             })
-#create a delete button function
-#html
-#python remove
+
 
 
 #edit
