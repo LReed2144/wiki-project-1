@@ -45,14 +45,19 @@ def search(request):
         search = request.POST['q']
         # md to html
         content = convert(search)
-        if content is not None:
+        #if someone types in a search item that is not a page display error message
+        if content == None: 
+            return render(request, "encyclopedia/error.html", {
+            "message": "This entry does not exist"
+        })
+        #if someone types in a search item that is a page display page
+        elif content is not None:
             return render(request, "encyclopedia/entry.html", {
             "title": search,
             "content": content
             })
-        # elif content is None:
-        #     return render(request, "encyclopedia/404.html")
         else: 
+            #if someone types in part of a title that is a page, display options of pages that are clickable to that page
             entries = util.list_entries()
             suggestion = []
             for entry in entries:
@@ -62,9 +67,7 @@ def search(request):
             return render(request, "encyclopedia/search.html", {
                 "suggestion": suggestion
             })
-#create an elif that allows for the user to type in something wrong and renders a page that says search item not found with a link to go back
-# #check python conditionals 
-# better understand this code
+
  
 
  #new page
@@ -110,8 +113,8 @@ def save_edit(request):
         title = request.POST['title']
         content = request.POST['content']
         util.save_entry(title, content)
-        title = convert(content)
-        return render(request, "encyclopedia/layout.html", {
+        content = convert(title)
+        return render(request, "encyclopedia/entry.html", {
             "title": title,
             "content": content
         })

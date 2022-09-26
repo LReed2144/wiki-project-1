@@ -11,9 +11,9 @@
 <form action="{% url 'save_edit' %}" method="POST">
     {% csrf_token %}
     <label>Title:</label>
-    <input type="text" name="title" placeholder="Enter a title" value="{{ title }}"><br/>
+    <input type="text" name="title" placeholder="Enter a title" value="{{ title | safe}}"><br/>
     <label>Content:</label><br>
-    <textarea name="content" placeholder="Write entry here">{{ content }}</textarea><br/>
+    <textarea name="content" placeholder="Write entry here">{{ content | safe }}</textarea><br/>
     <input type="Submit" value="Save" class="btn btn-primary">
 </form>
 <!-- one input for title -->
