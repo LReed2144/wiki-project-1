@@ -118,7 +118,7 @@ def save_edit(request):
             "title": title,
             "content": content
         })
-#####fix the save entry page#####currently returning to layout.html
+
 
 #random function
 

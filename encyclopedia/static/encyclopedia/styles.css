@@ -62,5 +62,7 @@ html *
 {
    font-family:Verdana, Geneva, Tahoma, sans-serif !important;
 }
-/* 404 page */
 
+#left {
+    text-align: left;
+}
