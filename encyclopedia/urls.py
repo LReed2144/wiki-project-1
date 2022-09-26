@@ -5,8 +5,7 @@ from . import views
 # URL configuration is defined
 urlpatterns = [
     path("", views.index, name="index"),
-    # no wiki before title here#################################################
-    path("<str:title>", views.entry, name="entry"),
+    path("wiki/<str:title>", views.entry, name="entry"),
     path("search/", views.search, name="search"),
     path("new/", views.new_page, name="new_page"),
     path("edit/", views.edit, name="edit"),
