@@ -13,3 +13,4 @@ urlpatterns = [
     path("rand/", views.rand, name="rand")
 
 ]
+
