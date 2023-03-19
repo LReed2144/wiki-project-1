@@ -55,7 +55,6 @@ MIDDLEWARE = [
 ]
 
 
-
 ROOT_URLCONF = 'wiki.urls'
 
 TEMPLATES = [
